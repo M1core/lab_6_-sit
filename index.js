@@ -70,6 +70,10 @@ app.get("/api/students/:id", (req, res) => {
 });
 
 app.post("/api/students", (req, res) => {
+  if (!req.body) {
+    res.statusCode = 400;
+    return res.end("Body is required");
+  }
   pool.connect((err, client, release) => {
     if (err) {
       return console.error("Error acquiring client", err.stack);
@@ -90,6 +94,10 @@ app.post("/api/students", (req, res) => {
 });
 
 app.put("/api/students/:id", (req, res) => {
+  if (!req.body) {
+    res.statusCode = 400;
+    return res.end("Body is required");
+  }
   let keysValues = "";
   Object.keys(req.body).map((el) => {
     keysValues += `'${req.body[el]}', `;
