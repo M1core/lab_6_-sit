@@ -3,6 +3,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 
+const port = process.env.PORT || 3000;
+
 const app = express();
 const pool = new Pool({
   user: "gyebwbggzumbve",
@@ -22,7 +24,7 @@ pool.on("error", (err, client) => {
 });
 
 app.use(bodyParser.json({ type: "application/json" }));
-app.listen(8080);
+app.listen(port);
 
 app.get("/", (req, res) => {
   res.write(
